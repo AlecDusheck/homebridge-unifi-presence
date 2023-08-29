@@ -1,16 +1,32 @@
 {
-  "pluginAlias": "ExampleHomebridgePlugin",
-  "pluginType": "platform",
-  "singular": true,
-  "schema": {
-    "type": "object",
-    "properties": {
-      "name": {
-        "title": "Name",
-        "type": "string",
-        "required": true,
-        "default": "Example Dynamic Platform"
+  "type": "object",
+  "properties": {
+    "unifi": {
+      "type": "object",
+      "properties": {
+        "hostname": { "type": "string" },
+        "port": { "type": "number" },
+        "username": { "type": "string" },
+        "password": { "type": "string" },
+        "sslverify": { "type": "boolean" }
+      },
+      "required": ["hostname", "port", "username", "password"]
+    },
+    "people": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "detectionType": {
+            "type": "string",
+            "enum": ["MAC", "HOSTNAME"]
+          },
+          "filter": { "type": "string" }
+        },
+        "required": ["name", "detectionType", "filter"]
       }
     }
-  }
+  },
+  "required": ["unifi", "people"]
 }
