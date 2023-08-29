@@ -14,7 +14,7 @@
     "sensor",
     "unifi"
   ],
-  "main": "index.js",
+  "main": "src/index.js",
   "dependencies": {
     "node-unifi": "^2.4.1"
   },
