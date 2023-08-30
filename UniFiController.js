@@ -9,7 +9,7 @@ class UniFiController {
 
   async login() {
     try {
-      await this.controller.login(config.username, config.password);
+      await this.controller.login(this.config.username, this.config.password);
       this.retryWait = 0; // Reset retry wait time on successful login
     } catch (error) {
       console.error(`Failed to log in to UniFi Controller: ${error}`);
