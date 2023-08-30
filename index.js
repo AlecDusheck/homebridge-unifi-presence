@@ -1,11 +1,13 @@
 const OccupancySensor = require('./OccupancySensor');
 const UniFiController = require('./UniFiController');
 
-let homebridge;
+let Service, Characteristic;
 
 module.exports = (api) => {
-  homebridge = api;
-  homebridge.registerAccessory('homebridge-unifi-presence', 'UniFiOccupancySensor', UniFiOccupancySensor);
+  Service = api.hap.Service;
+  Characteristic = api.hap.Characteristic;
+
+  api.registerAccessory('homebridge-unifi-presence', 'UniFiOccupancySensor', UniFiOccupancySensor);
 };
 
 class UniFiOccupancySensor {
@@ -18,7 +20,7 @@ class UniFiOccupancySensor {
     this.sensors = [];
 
     this.config.people.forEach(person => {
-      const sensor = new OccupancySensor(log, person, api);
+      const sensor = new OccupancySensor(log, person, Service, Characteristic);
       this.sensors.push(sensor);
     });
 
@@ -39,7 +41,7 @@ class UniFiOccupancySensor {
 
         this.sensors.forEach(sensor => {
           const isOccupied = this.checkOccupancy(sensor.config.detectionType, sensor.config.filter, clientDevices);
-          sensor.updateOccupancy(isOccupied);
+          sensor.updateOccupancy(isOccupied, Characteristic);
         });
 
       } catch (error) {

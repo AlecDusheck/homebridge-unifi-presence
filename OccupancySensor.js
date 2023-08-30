@@ -1,10 +1,7 @@
-const { Service, Characteristic } = require('homebridge');
-
 class OccupancySensor {
-  constructor(log, config, api) {
+  constructor(log, config, Service, Characteristic) {
     this.log = log;
     this.config = config;
-    this.api = api;
 
     this.service = new Service.OccupancySensor(this.config.name);
 
@@ -14,7 +11,7 @@ class OccupancySensor {
   }
 
   // Method to update the occupancy status
-  updateOccupancy(isOccupied) {
+  updateOccupancy(isOccupied, Characteristic) {
     const status = isOccupied ? Characteristic.OccupancyDetected.OCCUPANCY_DETECTED
                               : Characteristic.OccupancyDetected.OCCUPANCY_NOT_DETECTED;
 
