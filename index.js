@@ -19,8 +19,10 @@ class UniFiOccupancySensor {
 
     this.sensors = [];
 
-    this.config.people.forEach(person => {
-      const sensor = new OccupancySensor(log, person, Service, Characteristic);
+    this.config.people.forEach((person, index) => {
+      // Generate a unique subtype for each sensor based on its index
+      const subtype = `sensor-${index}`;
+      const sensor = new OccupancySensor(log, person, Service, Characteristic, subtype);
       this.sensors.push(sensor);
     });
 

@@ -1,9 +1,9 @@
 class OccupancySensor {
-  constructor(log, config, Service, Characteristic) {
+  constructor(log, config, Service, Characteristic, subtype) {
     this.log = log;
     this.config = config;
 
-    this.service = new Service.OccupancySensor(this.config.name);
+    this.service = new Service.OccupancySensor(this.config.name, subtype);
 
     // Initialize occupancy as not detected
     this.service.getCharacteristic(Characteristic.OccupancyDetected)
