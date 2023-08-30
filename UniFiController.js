@@ -2,6 +2,7 @@ const Unifi = require('node-unifi');
 
 class UniFiController {
   constructor(config) {
+    this.config = config;
     this.controller = new Unifi.Controller(config);
     this.retryWait = 0; // Time in milliseconds to wait before next login attempt
   }
