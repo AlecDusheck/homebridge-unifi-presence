@@ -43,6 +43,7 @@ class UniFiOccupancySensor {
 
         this.sensors.forEach(sensor => {
           const isOccupied = this.checkOccupancy(sensor.config.detectionType, sensor.config.filter, clientDevices);
+          console.log("Found occupied for ", sensor.config.name)
           sensor.updateOccupancy(isOccupied, Characteristic);
         });
 
@@ -56,7 +57,7 @@ class UniFiOccupancySensor {
     // Actual logic to determine if a client device matches the filter
     return clientDevices.some(device => 
       (detectionType === 'MAC' && device.mac === filter) || 
-      (detectionType === 'HOSTNAME' && device.hostname === filter)
+      (detectionType === 'IP' && device.ip === filter)
     );
   }
 

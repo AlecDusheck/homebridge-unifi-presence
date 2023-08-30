@@ -20,7 +20,7 @@
           "name": { "type": "string" },
           "detectionType": {
             "type": "string",
-            "enum": ["MAC", "HOSTNAME"]
+            "enum": ["MAC", "IP"]
           },
           "filter": { "type": "string" }
         },
